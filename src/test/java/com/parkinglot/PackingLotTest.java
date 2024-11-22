@@ -56,4 +56,17 @@ class PackingLotTest {
         // Then
         assertNull(fetchCar);
     }
+
+    @Test
+    void should_return_nothing_when_fetch_given_a_used_ticket() {
+        // Given
+        PackingLot packingLot = new PackingLot();
+        Car car = new Car();
+        Ticket ticket = packingLot.pack(car);
+        packingLot.fetch(ticket);
+        // When
+        Car fetchCar = packingLot.fetch(ticket);
+        // Then
+        assertNull(fetchCar);
+    }
 }
