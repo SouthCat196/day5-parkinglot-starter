@@ -50,7 +50,7 @@ class PackingLotTest {
         // Given
         PackingLot packingLot = new PackingLot();
         Car car = new Car();
-        Ticket ticket = packingLot.pack(car);
+        packingLot.pack(car);
         // When
         Car fetchCar = packingLot.fetch(new Ticket());
         // Then
@@ -68,5 +68,30 @@ class PackingLotTest {
         Car fetchCar = packingLot.fetch(ticket);
         // Then
         assertNull(fetchCar);
+    }
+    
+    @Test
+    void should_return_nothing_when_park_given_a_parking_lot_without_any_position() {
+        // Given
+        PackingLot packingLot = getFullPackingLot();
+        // When
+        Ticket ticket = packingLot.pack(new Car());
+        // Then
+        assertNull(ticket);
+    }
+
+    private static PackingLot getFullPackingLot() {
+        PackingLot packingLot = new PackingLot();
+        packingLot.pack(new Car());
+        packingLot.pack(new Car());
+        packingLot.pack(new Car());
+        packingLot.pack(new Car());
+        packingLot.pack(new Car());
+        packingLot.pack(new Car());
+        packingLot.pack(new Car());
+        packingLot.pack(new Car());
+        packingLot.pack(new Car());
+        packingLot.pack(new Car());
+        return packingLot;
     }
 }
