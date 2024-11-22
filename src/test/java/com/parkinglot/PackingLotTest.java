@@ -19,7 +19,7 @@ class PackingLotTest {
     }
     
     @Test
-    void should_return_the_car_when_fetch__given_a_ticket() {
+    void should_return_the_car_when_fetch_given_a_ticket() {
         // Given
         PackingLot packingLot = new PackingLot();
         Car car = new Car();
@@ -28,5 +28,22 @@ class PackingLotTest {
         Car fetchedCar = packingLot.fetch(ticket);
         // Then
         assertEquals(car, fetchedCar);
+    }
+
+    @Test
+    void should_return_right_car_when_fetch_given_two_tickets() {
+        // Given
+        PackingLot packingLot = new PackingLot();
+        Car firstCar = new Car();
+        Car secendCar = new Car();
+        Ticket firstCarTicket = packingLot.pack(firstCar);
+        Ticket secendCarTicket = packingLot.pack(secendCar);
+        // When
+        Car fetchFirstCar = packingLot.fetch(firstCarTicket);
+        Car fetchSecendCar = packingLot.fetch(secendCarTicket);
+
+        // Then
+        assertEquals(firstCar, fetchFirstCar);
+        assertEquals(secendCar, fetchSecendCar);
     }
 }
