@@ -1,5 +1,6 @@
 package com.parkinglot;
 
+import java.lang.invoke.WrongMethodTypeException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -17,8 +18,7 @@ public class PackingLot {
 
     public Ticket pack(Car car) {
         if(checkIsPackingLotFull()){
-            printfErrorMessage(NO_AVAILABLE_POSITION);
-            return null;
+            throw new NoAvailablePositionException();
         }
         capacity++;
         return getTicket(car);
@@ -37,18 +37,12 @@ public class PackingLot {
     public Car fetch(Ticket ticket) {
         Car car = parkingRecord.remove(ticket);
         if(Objects.isNull(car)){
-            printfErrorMessage(WRONG_TICKET_MESSAGE);
-            return null;
+            throw new UnrecognizedParkingTicketException();
         }
         if(capacity >= ZERO){
             capacity--;
         }
         return car;
     }
-
-    private void printfErrorMessage(String errorMessage) {
-        System.out.println(errorMessage);
-    }
-
 
 }

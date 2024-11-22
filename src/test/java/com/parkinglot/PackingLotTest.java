@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import static com.parkinglot.Constant.NO_AVAILABLE_POSITION;
+import static com.parkinglot.Constant.WRONG_TICKET_MESSAGE;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PackingLotTest {
@@ -63,10 +65,9 @@ class PackingLotTest {
         Car car = new Car();
         packingLot.pack(car);
         // When
-        Car fetchCar = packingLot.fetch(new Ticket());
+        UnrecognizedParkingTicketException exception = assertThrows(UnrecognizedParkingTicketException.class, () -> packingLot.fetch(new Ticket()));
         // Then
-        assertNull(fetchCar);
-        assertTrue(systemOut().contains("Unrecognized parking ticket."));
+        assertEquals(exception.getMessage(), WRONG_TICKET_MESSAGE);
     }
 
     @Test
@@ -77,10 +78,9 @@ class PackingLotTest {
         Ticket ticket = packingLot.pack(car);
         packingLot.fetch(ticket);
         // When
-        Car fetchCar = packingLot.fetch(ticket);
+        UnrecognizedParkingTicketException exception = assertThrows(UnrecognizedParkingTicketException.class, () -> packingLot.fetch(new Ticket()));
         // Then
-        assertNull(fetchCar);
-        assertTrue(systemOut().contains("Unrecognized parking ticket."));
+        assertEquals(exception.getMessage(), WRONG_TICKET_MESSAGE);
     }
 
     @Test
@@ -88,10 +88,9 @@ class PackingLotTest {
         // Given
         PackingLot packingLot = getFullPackingLot();
         // When
-        Ticket ticket = packingLot.pack(new Car());
+        NoAvailablePositionException exception = assertThrows(NoAvailablePositionException.class, () -> packingLot.pack(new Car()));
         // Then
-        assertNull(ticket);
-        assertTrue(systemOut().contains("No available position."));
+        assertEquals(exception.getMessage(), NO_AVAILABLE_POSITION);
     }
 
     private static PackingLot getFullPackingLot() {
@@ -107,9 +106,5 @@ class PackingLotTest {
         packingLot.pack(new Car());
         packingLot.pack(new Car());
         return packingLot;
-    }
-
-    private String systemOut() {
-        return outContent.toString();
     }
 }
