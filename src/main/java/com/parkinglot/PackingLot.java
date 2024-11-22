@@ -2,13 +2,13 @@ package com.parkinglot;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-import static com.parkinglot.Constant.MAXIMUM_CAPACITY;
-import static com.parkinglot.Constant.ZERO;
+import static com.parkinglot.Constant.*;
 
 public class PackingLot {
 
-    private Map<Ticket, Car> parkingRecord = new HashMap<>();
+    private final Map<Ticket, Car> parkingRecord = new HashMap<>();
     private int capacity;
 
     public PackingLot() {
@@ -17,6 +17,7 @@ public class PackingLot {
 
     public Ticket pack(Car car) {
         if(checkIsPackingLotFull()){
+            printfErrorMessage(NO_AVAILABLE_POSITION);
             return null;
         }
         capacity++;
@@ -34,9 +35,20 @@ public class PackingLot {
     }
 
     public Car fetch(Ticket ticket) {
+        Car car = parkingRecord.remove(ticket);
+        if(Objects.isNull(car)){
+            printfErrorMessage(WRONG_TICKET_MESSAGE);
+            return null;
+        }
         if(capacity >= ZERO){
             capacity--;
         }
-        return parkingRecord.remove(ticket);
+        return car;
     }
+
+    private void printfErrorMessage(String errorMessage) {
+        System.out.println(errorMessage);
+    }
+
+
 }

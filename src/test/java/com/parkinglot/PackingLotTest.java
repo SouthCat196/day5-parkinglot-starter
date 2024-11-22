@@ -1,10 +1,21 @@
 package com.parkinglot;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PackingLotTest {
+
+    private ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setup() {
+        System.setOut(new PrintStream(outContent));
+    }
 
     @Test
     void should_return_ticket_when_pack_given_a_car() {
@@ -16,7 +27,7 @@ class PackingLotTest {
         // Then
         assertNotNull(ticket);
     }
-    
+
     @Test
     void should_return_the_car_when_fetch_given_a_ticket() {
         // Given
@@ -55,6 +66,7 @@ class PackingLotTest {
         Car fetchCar = packingLot.fetch(new Ticket());
         // Then
         assertNull(fetchCar);
+        assertTrue(systemOut().contains("Unrecognized parking ticket."));
     }
 
     @Test
@@ -68,8 +80,9 @@ class PackingLotTest {
         Car fetchCar = packingLot.fetch(ticket);
         // Then
         assertNull(fetchCar);
+        assertTrue(systemOut().contains("Unrecognized parking ticket."));
     }
-    
+
     @Test
     void should_return_nothing_when_park_given_a_parking_lot_without_any_position() {
         // Given
@@ -78,6 +91,7 @@ class PackingLotTest {
         Ticket ticket = packingLot.pack(new Car());
         // Then
         assertNull(ticket);
+        assertTrue(systemOut().contains("No available position."));
     }
 
     private static PackingLot getFullPackingLot() {
@@ -93,5 +107,9 @@ class PackingLotTest {
         packingLot.pack(new Car());
         packingLot.pack(new Car());
         return packingLot;
+    }
+
+    private String systemOut() {
+        return outContent.toString();
     }
 }
