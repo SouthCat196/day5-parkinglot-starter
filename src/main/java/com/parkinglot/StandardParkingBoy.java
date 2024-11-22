@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ParkingBoy implements ParkingManager {
+public class StandardParkingBoy implements ParkingManager {
 
     private List<ParkingLot> parkingLots = new ArrayList<>();
 
