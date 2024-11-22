@@ -1,5 +1,8 @@
-package com.parkinglot;
+package com.parkinglot.parkingBoy;
 
+import com.parkinglot.Car;
+import com.parkinglot.ParkingLot;
+import com.parkinglot.Ticket;
 import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedParkingTicketException;
 
@@ -7,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class StandardParkingBoy implements ParkingManager {
+public class StandardParkingBoy implements ParkingBoy {
 
     private List<ParkingLot> parkingLots = new ArrayList<>();
 

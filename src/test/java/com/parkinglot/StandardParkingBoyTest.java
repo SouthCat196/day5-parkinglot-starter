@@ -2,6 +2,7 @@ package com.parkinglot;
 
 import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedParkingTicketException;
+import com.parkinglot.parkingBoy.StandardParkingBoy;
 import org.junit.jupiter.api.Test;
 
 import static com.parkinglot.constant.Constant.NO_AVAILABLE_POSITION;

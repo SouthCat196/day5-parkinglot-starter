@@ -9,7 +9,7 @@ import java.util.Map;
 import static com.parkinglot.constant.Constant.MAXIMUM_CAPACITY;
 import static com.parkinglot.constant.Constant.ZERO;
 
-public class ParkingLot implements ParkingManager{
+public class ParkingLot {
 
     private final Map<Ticket, Car> parkingRecord = new HashMap<>();
     private int capacity;
@@ -22,7 +22,6 @@ public class ParkingLot implements ParkingManager{
         return parkingRecord.size() >= MAXIMUM_CAPACITY;
     }
 
-    @Override
     public Ticket park(Car car) {
         if(checkIsPackingLotFull()){
             throw new NoAvailablePositionException();
@@ -31,7 +30,6 @@ public class ParkingLot implements ParkingManager{
         return getTicket(car);
     }
 
-    @Override
     public Car fetch(Ticket ticket) {
         if(checkTicketInPackingLot(ticket)){
             capacity--;
