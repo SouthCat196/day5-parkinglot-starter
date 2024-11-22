@@ -3,15 +3,16 @@ package com.parkinglot;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.parkinglot.Constant.MAXIMUM_CAPACITY;
+import static com.parkinglot.Constant.ZERO;
+
 public class PackingLot {
 
-    public static final int MAXIMUM_CAPACITY = 10;
-    public static final int ZERO = 0;
     private Map<Ticket, Car> parkingRecord = new HashMap<>();
     private int capacity;
 
     public PackingLot() {
-        this.capacity = 0;
+        this.capacity = ZERO;
     }
 
     public Ticket pack(Car car) {
