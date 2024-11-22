@@ -1,6 +1,6 @@
-package com.parkinglot;
+package com.parkinglot.exception;
 
-import static com.parkinglot.Constant.NO_AVAILABLE_POSITION;
+import static com.parkinglot.constant.Constant.NO_AVAILABLE_POSITION;
 
 public class NoAvailablePositionException extends RuntimeException {
     public NoAvailablePositionException() {

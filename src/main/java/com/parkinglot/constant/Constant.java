@@ -1,4 +1,4 @@
-package com.parkinglot;
+package com.parkinglot.constant;
 
 public class Constant {
     public static final int MAXIMUM_CAPACITY = 10;

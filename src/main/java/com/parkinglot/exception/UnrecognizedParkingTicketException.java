@@ -1,6 +1,6 @@
-package com.parkinglot;
+package com.parkinglot.exception;
 
-import static com.parkinglot.Constant.WRONG_TICKET_MESSAGE;
+import static com.parkinglot.constant.Constant.WRONG_TICKET_MESSAGE;
 
 public class UnrecognizedParkingTicketException extends RuntimeException{
     public UnrecognizedParkingTicketException() {
