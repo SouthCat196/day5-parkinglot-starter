@@ -14,6 +14,6 @@ public class PackingLot {
     }
 
     public Car fetch(Ticket ticket) {
-        return parkingRecord.get(ticket);
+        return parkingRecord.getOrDefault(ticket, null);
     }
 }
