@@ -5,28 +5,21 @@ import com.parkinglot.exception.UnrecognizedParkingTicketException;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import static com.parkinglot.constant.Constant.MAXIMUM_CAPACITY;
 import static com.parkinglot.constant.Constant.ZERO;
 
-public class PackingLot implements ParkingManager{
+public class ParkingLot implements ParkingManager{
 
     private final Map<Ticket, Car> parkingRecord = new HashMap<>();
     private int capacity;
 
-    public PackingLot() {
+    public ParkingLot() {
         this.capacity = ZERO;
     }
 
-    private boolean checkIsPackingLotFull() {
+    public boolean checkIsPackingLotFull() {
         return parkingRecord.size() >= MAXIMUM_CAPACITY;
-    }
-
-    private Ticket getTicket(Car car) {
-        Ticket ticket = new Ticket();
-        parkingRecord.put(ticket, car);
-        return ticket;
     }
 
     @Override
@@ -40,14 +33,25 @@ public class PackingLot implements ParkingManager{
 
     @Override
     public Car fetch(Ticket ticket) {
-        Car car = parkingRecord.remove(ticket);
-        if(Objects.isNull(car)){
+        if(checkTicketInPackingLot(ticket)){
+            capacity--;
+            return parkingRecord.remove(ticket);
+        }else {
             throw new UnrecognizedParkingTicketException();
         }
-        if(capacity >= ZERO){
-            capacity--;
-        }
-        return car;
     }
 
+    public boolean checkTicketInPackingLot(Ticket ticket) {
+        return parkingRecord.containsKey(ticket);
+    }
+
+    private Ticket getTicket(Car car) {
+        Ticket ticket = new Ticket();
+        parkingRecord.put(ticket, car);
+        return ticket;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
 }

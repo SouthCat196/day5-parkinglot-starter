@@ -1,20 +1,43 @@
 package com.parkinglot;
 
-public class ParkingBoy implements ParkingManager{
+import com.parkinglot.exception.NoAvailablePositionException;
+import com.parkinglot.exception.UnrecognizedParkingTicketException;
 
-    private PackingLot packingLot;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-    public ParkingBoy(PackingLot packingLot) {
-        this.packingLot = packingLot;
-    }
+public class ParkingBoy implements ParkingManager {
+
+    private List<ParkingLot> parkingLots = new ArrayList<>();
 
     @Override
     public Ticket park(Car car) {
-        return packingLot.park(car);
+        Optional<ParkingLot> hasPositionPackingLot = parkingLots.stream()
+                .filter(parkingLot -> !parkingLot.checkIsPackingLotFull())
+                .findFirst();
+        if (hasPositionPackingLot.isPresent()) {
+            return hasPositionPackingLot.get().park(car);
+        } else {
+            throw new NoAvailablePositionException();
+        }
     }
 
     @Override
     public Car fetch(Ticket ticket) {
-        return packingLot.fetch(ticket);
+        Optional<ParkingLot> matchPackingLot = parkingLots.stream()
+                .filter(parkingLot -> parkingLot.checkTicketInPackingLot(ticket))
+                .findFirst();
+        if (matchPackingLot.isPresent()) {
+            return matchPackingLot.get().fetch(ticket);
+        } else {
+            throw new UnrecognizedParkingTicketException();
+        }
+    }
+
+    public void addPackingLot(ParkingLot parkingLot) {
+        if (!parkingLots.contains(parkingLot)) {
+            parkingLots.add(parkingLot);
+        }
     }
 }
