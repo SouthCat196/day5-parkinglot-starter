@@ -32,7 +32,7 @@ class StandardParkingBoyTest {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
-        standardParkingBoy.addPackingLot(parkingLot);
+        standardParkingBoy.addParkingLot(parkingLot);
         Car car = new Car();
         // When
         Ticket ticket = standardParkingBoy.park(car);
@@ -45,7 +45,7 @@ class StandardParkingBoyTest {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
-        standardParkingBoy.addPackingLot(parkingLot);
+        standardParkingBoy.addParkingLot(parkingLot);
         Car car = new Car();
         Ticket ticket = standardParkingBoy.park(car);
         // When
@@ -59,7 +59,7 @@ class StandardParkingBoyTest {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
-        standardParkingBoy.addPackingLot(parkingLot);
+        standardParkingBoy.addParkingLot(parkingLot);
         Car firstCar = new Car();
         Car secendCar = new Car();
         Ticket firstCarTicket = standardParkingBoy.park(firstCar);
@@ -77,7 +77,7 @@ class StandardParkingBoyTest {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
-        standardParkingBoy.addPackingLot(parkingLot);
+        standardParkingBoy.addParkingLot(parkingLot);
         Car car = new Car();
         standardParkingBoy.park(car);
         // When
@@ -91,7 +91,7 @@ class StandardParkingBoyTest {
         ParkingLot parkingLot = new ParkingLot();
         System.out.println(parkingLot);
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
-        standardParkingBoy.addPackingLot(parkingLot);
+        standardParkingBoy.addParkingLot(parkingLot);
         Car car = new Car();
         Ticket ticket = standardParkingBoy.park(car);
         standardParkingBoy.fetch(ticket);
@@ -105,7 +105,7 @@ class StandardParkingBoyTest {
         // Given
         ParkingLot parkingLot = getFullPackingLot();
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
-        standardParkingBoy.addPackingLot(parkingLot);
+        standardParkingBoy.addParkingLot(parkingLot);
         // When
         // Then
         assertThrows(NoAvailablePositionException.class, () -> standardParkingBoy.park(new Car()), NO_AVAILABLE_POSITION);
@@ -117,8 +117,8 @@ class StandardParkingBoyTest {
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
-        standardParkingBoy.addPackingLot(firstParkingLot);
-        standardParkingBoy.addPackingLot(secondParkingLot);
+        standardParkingBoy.addParkingLot(firstParkingLot);
+        standardParkingBoy.addParkingLot(secondParkingLot);
         Car car = new Car();
         // When
         Ticket ticket = standardParkingBoy.park(car);
@@ -133,8 +133,8 @@ class StandardParkingBoyTest {
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         ParkingLot firstParkingLot = getFullPackingLot();
         ParkingLot secondParkingLot = new ParkingLot();
-        standardParkingBoy.addPackingLot(firstParkingLot);
-        standardParkingBoy.addPackingLot(secondParkingLot);
+        standardParkingBoy.addParkingLot(firstParkingLot);
+        standardParkingBoy.addParkingLot(secondParkingLot);
         Car car = new Car();
         // When
         Ticket ticket = standardParkingBoy.park(car);
@@ -153,8 +153,8 @@ class StandardParkingBoyTest {
         Car secondCar = new Car();
         Ticket firstTicket = firstParkingLot.park(firstCar);
         Ticket secondTicket = secondParkingLot.park(secondCar);
-        standardParkingBoy.addPackingLot(firstParkingLot);
-        standardParkingBoy.addPackingLot(secondParkingLot);
+        standardParkingBoy.addParkingLot(firstParkingLot);
+        standardParkingBoy.addParkingLot(secondParkingLot);
         // When
         Car fetchFirstCar = standardParkingBoy.fetch(firstTicket);
         Car fetchSecondCar = standardParkingBoy.fetch(secondTicket);
@@ -169,8 +169,8 @@ class StandardParkingBoyTest {
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
-        standardParkingBoy.addPackingLot(firstParkingLot);
-        standardParkingBoy.addPackingLot(secondParkingLot);
+        standardParkingBoy.addParkingLot(firstParkingLot);
+        standardParkingBoy.addParkingLot(secondParkingLot);
         Car car = new Car();
         standardParkingBoy.park(car);
         // When
@@ -184,8 +184,8 @@ class StandardParkingBoyTest {
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
-        standardParkingBoy.addPackingLot(firstParkingLot);
-        standardParkingBoy.addPackingLot(secondParkingLot);
+        standardParkingBoy.addParkingLot(firstParkingLot);
+        standardParkingBoy.addParkingLot(secondParkingLot);
         Car car = new Car();
         Ticket ticket = standardParkingBoy.park(car);
         standardParkingBoy.fetch(ticket);
@@ -200,8 +200,8 @@ class StandardParkingBoyTest {
         StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
         ParkingLot firstParkingLot = getFullPackingLot();
         ParkingLot secondParkingLot = getFullPackingLot();
-        standardParkingBoy.addPackingLot(firstParkingLot);
-        standardParkingBoy.addPackingLot(secondParkingLot);
+        standardParkingBoy.addParkingLot(firstParkingLot);
+        standardParkingBoy.addParkingLot(secondParkingLot);
         Car car = new Car();
         // When
         // Then

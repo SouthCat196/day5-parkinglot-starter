@@ -15,8 +15,8 @@ class SmartParkingBoyTest {
         firstParkingLot.park(new Car());
         firstParkingLot.park(new Car());
         ParkingLot secondParkingLot = new ParkingLot();
-        smartParkingBoy.addPackingLot(firstParkingLot);
-        smartParkingBoy.addPackingLot(secondParkingLot);
+        smartParkingBoy.addParkingLot(firstParkingLot);
+        smartParkingBoy.addParkingLot(secondParkingLot);
         Car car = new Car();
         // When
         Ticket ticket = smartParkingBoy.park(car);
@@ -35,8 +35,8 @@ class SmartParkingBoyTest {
         ParkingLot secondParkingLot = new ParkingLot();
         secondParkingLot.park(new Car());
         secondParkingLot.park(new Car());
-        smartParkingBoy.addPackingLot(firstParkingLot);
-        smartParkingBoy.addPackingLot(secondParkingLot);
+        smartParkingBoy.addParkingLot(firstParkingLot);
+        smartParkingBoy.addParkingLot(secondParkingLot);
         Car car = new Car();
         // When
         Ticket ticket = smartParkingBoy.park(car);

@@ -5,20 +5,20 @@ import com.parkinglot.ParkingLot;
 import com.parkinglot.Ticket;
 import com.parkinglot.exception.NoAvailablePositionException;
 
+import java.util.Comparator;
 import java.util.Optional;
 
-public class SmartParkingBoy extends ParkingBoy {
+public class SuperParkingBoy extends ParkingBoy {
 
     @Override
     public Ticket park(Car car) {
-        Optional<ParkingLot> maxEmptyPositionPackingLot = parkingLots.stream()
+        Optional<ParkingLot> maxAvailablePositionRatePackingLot = parkingLots.stream()
                 .filter(parkingLot -> !parkingLot.checkIsPackingLotFull())
-                .max((firstParkingBoy, secondParkingBoy) -> secondParkingBoy.getCapacity() - firstParkingBoy.getCapacity());
-        if (maxEmptyPositionPackingLot.isPresent()) {
-            return maxEmptyPositionPackingLot.get().park(car);
+                .max(Comparator.comparingDouble(ParkingLot::getAvailablePositionRate));
+        if (maxAvailablePositionRatePackingLot.isPresent()) {
+            return maxAvailablePositionRatePackingLot.get().park(car);
         } else {
             throw new NoAvailablePositionException();
         }
     }
-
 }
