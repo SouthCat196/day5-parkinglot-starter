@@ -6,12 +6,12 @@ import com.parkinglot.Ticket;
 import com.parkinglot.exception.NoAvailablePositionException;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
-public class SuperParkingBoy extends ParkingBoy {
-
+public class SuperParkingStrategy implements ParkingStrategy {
     @Override
-    public Ticket park(Car car) {
+    public Ticket park(List<ParkingLot> parkingLots, Car car) {
         Optional<ParkingLot> maxAvailablePositionRatePackingLot = parkingLots.stream()
                 .filter(parkingLot -> !parkingLot.checkIsPackingLotFull())
                 .max(Comparator.comparingDouble(ParkingLot::getAvailablePositionRate));

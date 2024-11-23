@@ -1,6 +1,7 @@
 package com.parkinglot;
 
-import com.parkinglot.parkingBoy.SmartParkingBoy;
+import com.parkinglot.parkingBoy.ParkingBoy;
+import com.parkinglot.parkingBoy.SmartParkingStrategy;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,7 +11,7 @@ class SmartParkingBoyTest {
     @Test
     void should_car_parked_more_empty_positions_parking_lot_when_park_given_tow_not_same_empty_positions_parking_lot() {
         // Given
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+        ParkingBoy smartParkingBoy = new ParkingBoy(new SmartParkingStrategy());
         ParkingLot firstParkingLot = new ParkingLot();
         firstParkingLot.park(new Car());
         firstParkingLot.park(new Car());
@@ -28,7 +29,7 @@ class SmartParkingBoyTest {
     @Test
     void should_car_parked_first_parking_lot_when_park_given_tow_same_empty_positions_parking_lot() {
         // Given
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy();
+        ParkingBoy smartParkingBoy = new ParkingBoy(new SmartParkingStrategy());
         ParkingLot firstParkingLot = new ParkingLot();
         firstParkingLot.park(new Car());
         firstParkingLot.park(new Car());

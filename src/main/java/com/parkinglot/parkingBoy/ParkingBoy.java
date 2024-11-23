@@ -9,15 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class ParkingBoy implements ParkingLotManagement {
+public class ParkingBoy {
     protected List<ParkingLot> parkingLots = new ArrayList<>();
+    private ParkingStrategy parkingStrategy;
 
-    @Override
+    public ParkingBoy(ParkingStrategy parkingStrategy) {
+        this.parkingStrategy = parkingStrategy;
+    }
+
     public void addParkingLot(ParkingLot parkingLot) {
         parkingLots.add(parkingLot);
     }
 
-    @Override
+    public Ticket park(Car car) {
+        return parkingStrategy.park(parkingLots, car);
+    }
+
     public Car fetch(Ticket ticket) {
         Optional<ParkingLot> matchPackingLot = parkingLots.stream()
                 .filter(parkingLot -> parkingLot.checkTicketInPackingLot(ticket))

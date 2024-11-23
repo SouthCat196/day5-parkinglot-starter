@@ -2,7 +2,8 @@ package com.parkinglot;
 
 import com.parkinglot.exception.NoAvailablePositionException;
 import com.parkinglot.exception.UnrecognizedParkingTicketException;
-import com.parkinglot.parkingBoy.StandardParkingBoy;
+import com.parkinglot.parkingBoy.ParkingBoy;
+import com.parkinglot.parkingBoy.StandardParkingStrategy;
 import org.junit.jupiter.api.Test;
 
 import static com.parkinglot.constant.Constant.NO_AVAILABLE_POSITION;
@@ -31,7 +32,7 @@ class StandardParkingBoyTest {
     void should_return_ticket_when_pack_given_a_car() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        ParkingBoy standardParkingBoy = new ParkingBoy(new StandardParkingStrategy());
         standardParkingBoy.addParkingLot(parkingLot);
         Car car = new Car();
         // When
@@ -44,7 +45,7 @@ class StandardParkingBoyTest {
     void should_return_the_car_when_fetch_given_a_ticket() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        ParkingBoy standardParkingBoy = new ParkingBoy(new StandardParkingStrategy());
         standardParkingBoy.addParkingLot(parkingLot);
         Car car = new Car();
         Ticket ticket = standardParkingBoy.park(car);
@@ -58,7 +59,7 @@ class StandardParkingBoyTest {
     void should_return_right_car_when_fetch_given_two_tickets() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        ParkingBoy standardParkingBoy = new ParkingBoy(new StandardParkingStrategy());
         standardParkingBoy.addParkingLot(parkingLot);
         Car firstCar = new Car();
         Car secendCar = new Car();
@@ -76,7 +77,7 @@ class StandardParkingBoyTest {
     void should_return_nothing_when_fetch_given_a_wrong_ticket() {
         // Given
         ParkingLot parkingLot = new ParkingLot();
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        ParkingBoy standardParkingBoy = new ParkingBoy(new StandardParkingStrategy());
         standardParkingBoy.addParkingLot(parkingLot);
         Car car = new Car();
         standardParkingBoy.park(car);
@@ -90,7 +91,7 @@ class StandardParkingBoyTest {
         // Given
         ParkingLot parkingLot = new ParkingLot();
         System.out.println(parkingLot);
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        ParkingBoy standardParkingBoy = new ParkingBoy(new StandardParkingStrategy());
         standardParkingBoy.addParkingLot(parkingLot);
         Car car = new Car();
         Ticket ticket = standardParkingBoy.park(car);
@@ -104,7 +105,7 @@ class StandardParkingBoyTest {
     void should_return_nothing_when_park_given_a_parking_lot_without_any_position() {
         // Given
         ParkingLot parkingLot = getFullPackingLot();
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        ParkingBoy standardParkingBoy = new ParkingBoy(new StandardParkingStrategy());
         standardParkingBoy.addParkingLot(parkingLot);
         // When
         // Then
@@ -114,7 +115,7 @@ class StandardParkingBoyTest {
     @Test
     void should_car_parked_first_parking_lot_when_park_given_tow_not_full_parking_lot() {
         // Given
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        ParkingBoy standardParkingBoy = new ParkingBoy(new StandardParkingStrategy());
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
         standardParkingBoy.addParkingLot(firstParkingLot);
@@ -130,7 +131,7 @@ class StandardParkingBoyTest {
     @Test
     void should_car_parked_second_parking_lot_when_park_given_one_full_parking_log_and_one_not_full_parking_lot() {
         // Given
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        ParkingBoy standardParkingBoy = new ParkingBoy(new StandardParkingStrategy());
         ParkingLot firstParkingLot = getFullPackingLot();
         ParkingLot secondParkingLot = new ParkingLot();
         standardParkingBoy.addParkingLot(firstParkingLot);
@@ -146,7 +147,7 @@ class StandardParkingBoyTest {
     @Test
     void should_return_right_car_when_fetch_given_two_car_in_two_packing_lot() {
         // Given
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        ParkingBoy standardParkingBoy = new ParkingBoy(new StandardParkingStrategy());
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
         Car firstCar = new Car();
@@ -166,7 +167,7 @@ class StandardParkingBoyTest {
     @Test
     void should_return_nothing_when_fetch_given_two_packing_lot_and_wrong_ticket() {
         // Given
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        ParkingBoy standardParkingBoy = new ParkingBoy(new StandardParkingStrategy());
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
         standardParkingBoy.addParkingLot(firstParkingLot);
@@ -181,7 +182,7 @@ class StandardParkingBoyTest {
     @Test
     void should_return_nothing_when_fetch_given_two_packing_lot_and_used_ticket() {
         // Given
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        ParkingBoy standardParkingBoy = new ParkingBoy(new StandardParkingStrategy());
         ParkingLot firstParkingLot = new ParkingLot();
         ParkingLot secondParkingLot = new ParkingLot();
         standardParkingBoy.addParkingLot(firstParkingLot);
@@ -197,7 +198,7 @@ class StandardParkingBoyTest {
     @Test
     void should_return_nothing_when_fetch_given_two_full_packing_lot() {
         // Given
-        StandardParkingBoy standardParkingBoy = new StandardParkingBoy();
+        ParkingBoy standardParkingBoy = new ParkingBoy(new StandardParkingStrategy());
         ParkingLot firstParkingLot = getFullPackingLot();
         ParkingLot secondParkingLot = getFullPackingLot();
         standardParkingBoy.addParkingLot(firstParkingLot);

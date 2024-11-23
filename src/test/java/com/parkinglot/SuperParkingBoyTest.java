@@ -1,6 +1,7 @@
 package com.parkinglot;
 
-import com.parkinglot.parkingBoy.SuperParkingBoy;
+import com.parkinglot.parkingBoy.ParkingBoy;
+import com.parkinglot.parkingBoy.SuperParkingStrategy;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.IntStream;
@@ -12,7 +13,7 @@ class SuperParkingBoyTest {
     @Test
     void should_car_parked_max_available_position_rate_parking_lot_when_park_given_tow_not_same_available_position_rate_parking_lot() {
         // Given
-        SuperParkingBoy smartParkingBoy = new SuperParkingBoy();
+        ParkingBoy smartParkingBoy = new ParkingBoy(new SuperParkingStrategy());
         // 80 / 100
         ParkingLot firstParkingLot = new ParkingLot(100);
         IntStream.rangeClosed(1, 80)
@@ -33,7 +34,7 @@ class SuperParkingBoyTest {
     @Test
     void should_car_parked_first_parking_lot_when_park_given_tow_same_available_position_rate_parking_lot() {
         // Given
-        SuperParkingBoy smartParkingBoy = new SuperParkingBoy();
+        ParkingBoy smartParkingBoy = new ParkingBoy(new SuperParkingStrategy());
         ParkingLot firstParkingLot = new ParkingLot(3);
         IntStream.rangeClosed(1, 2)
                 .forEach(i -> firstParkingLot.park(new Car()));

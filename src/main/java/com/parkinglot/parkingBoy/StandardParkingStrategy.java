@@ -5,12 +5,13 @@ import com.parkinglot.ParkingLot;
 import com.parkinglot.Ticket;
 import com.parkinglot.exception.NoAvailablePositionException;
 
+import java.util.List;
 import java.util.Optional;
 
-public class StandardParkingBoy extends ParkingBoy {
+public class StandardParkingStrategy implements ParkingStrategy{
 
     @Override
-    public Ticket park(Car car) {
+    public Ticket park(List<ParkingLot> parkingLots, Car car) {
         Optional<ParkingLot> hasPositionPackingLot = parkingLots.stream()
                 .filter(parkingLot -> !parkingLot.checkIsPackingLotFull())
                 .findFirst();
