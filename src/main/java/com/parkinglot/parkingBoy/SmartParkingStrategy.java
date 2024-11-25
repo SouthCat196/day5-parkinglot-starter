@@ -12,7 +12,7 @@ public class SmartParkingStrategy implements ParkingStrategy {
     public Ticket park(List<ParkingLot> parkingLots, Car car) {
         return parkingLots.stream()
                 .filter(parkingLot -> !parkingLot.checkIsPackingLotFull())
-                .max((firstParkingBoy, secondParkingBoy) -> secondParkingBoy.getCapacity() - firstParkingBoy.getCapacity())
+                .max((firstParkingLot, secondParkingLot) -> secondParkingLot.getCapacity() - firstParkingLot.getCapacity())
                 .orElseThrow(NoAvailablePositionException::new)
                 .park(car);
     }

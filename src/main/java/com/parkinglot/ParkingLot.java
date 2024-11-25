@@ -7,21 +7,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.parkinglot.constant.Constant.DEFAULT_MAXIMUM_CAPACITY;
-import static com.parkinglot.constant.Constant.ZERO;
 
 public class ParkingLot {
 
     private final Map<Ticket, Car> parkingRecord = new HashMap<>();
-    private int capacity;
     private int maxCapacity;
 
     public ParkingLot() {
-        this.capacity = ZERO;
         this.maxCapacity = DEFAULT_MAXIMUM_CAPACITY;
     }
 
     public ParkingLot(int maxCapacity) {
-        this.capacity = ZERO;
         this.maxCapacity = maxCapacity;
     }
 
@@ -33,13 +29,11 @@ public class ParkingLot {
         if (checkIsPackingLotFull()) {
             throw new NoAvailablePositionException();
         }
-        capacity++;
         return getTicket(car);
     }
 
     public Car fetch(Ticket ticket) {
         if (checkTicketInPackingLot(ticket)) {
-            capacity--;
             return parkingRecord.remove(ticket);
         } else {
             throw new UnrecognizedParkingTicketException();
@@ -57,10 +51,10 @@ public class ParkingLot {
     }
 
     public int getCapacity() {
-        return capacity;
+        return parkingRecord.size();
     }
 
     public double getAvailablePositionRate() {
-        return (double) (maxCapacity - capacity) / maxCapacity;
+        return (double) (maxCapacity - parkingRecord.size()) / maxCapacity;
     }
 }
