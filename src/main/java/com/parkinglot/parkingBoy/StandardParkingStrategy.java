@@ -6,19 +6,15 @@ import com.parkinglot.Ticket;
 import com.parkinglot.exception.NoAvailablePositionException;
 
 import java.util.List;
-import java.util.Optional;
 
-public class StandardParkingStrategy implements ParkingStrategy{
+public class StandardParkingStrategy implements ParkingStrategy {
 
     @Override
     public Ticket park(List<ParkingLot> parkingLots, Car car) {
-        Optional<ParkingLot> hasPositionPackingLot = parkingLots.stream()
+        return parkingLots.stream()
                 .filter(parkingLot -> !parkingLot.checkIsPackingLotFull())
-                .findFirst();
-        if (hasPositionPackingLot.isPresent()) {
-            return hasPositionPackingLot.get().park(car);
-        } else {
-            throw new NoAvailablePositionException();
-        }
+                .findFirst()
+                .orElseThrow(NoAvailablePositionException::new)
+                .park(car);
     }
 }
